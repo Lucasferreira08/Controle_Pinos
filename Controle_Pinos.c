@@ -8,6 +8,25 @@
 #define GPIO_LED_GREEN 17
 #define GPIO_LED_BLUE 16
 
+// Definindo o pino do buzzer
+#define BUZZER_PIN 21
+
+void setup_buzzer() {
+    // Inicializa o pino do buzzer
+    gpio_init(BUZZER_PIN);
+    gpio_set_dir(BUZZER_PIN, GPIO_OUT);
+
+    // teclado matricial pra configuracao
+    set_rows_output();
+    set_cols_input();
+}
+
+void acionar_buzzer() {
+    gpio_put(BUZZER_PIN, true); // Liga o buzzer
+    sleep_ms(2000);              // Aguardar 2 segundos
+    gpio_put(BUZZER_PIN, false); // Desliga o buzzer
+}
+
 int main(){
     stdio_init_all();
     
@@ -17,6 +36,8 @@ int main(){
     gpio_set_dir(GPIO_LED_RED, GPIO_OUT);
     gpio_set_dir(GPIO_LED_GREEN, GPIO_OUT);
     gpio_set_dir(GPIO_LED_BLUE, GPIO_OUT);
+
+    setup_buzzer();
 
     set_rows_output();
     set_cols_input();
@@ -37,9 +58,14 @@ int main(){
             gpio_put(GPIO_LED_GREEN,false);
             gpio_put(GPIO_LED_BLUE,false);
         }
-        // busy_wait_us(500000);
-        sleep_ms(1000);
 
-      // sleep_ms(1000);
+
+      // Aciona o buzzer se a tecla for pressionada
+      if (detect_button() == '#') 
+      {
+          acionar_buzzer(); // Aciona o buzzer
+      }
+
+      sleep_ms(1000);
     }
 }

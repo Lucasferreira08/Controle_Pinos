@@ -6,7 +6,7 @@ void set_rows_output(){
   for (int i=0; i<4; i++){
     gpio_init(pins_matrix_r[i]);
     gpio_set_dir(pins_matrix_r[i], GPIO_OUT);
-    gpio_put(pins_matrix_r[i], 0);
+    gpio_put(pins_matrix_r[i], 1);
   }
 }
 

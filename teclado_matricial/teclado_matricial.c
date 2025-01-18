@@ -34,7 +34,8 @@ char detect_button(){
     for(int j=0; j<4; j++){
       // Detecta se alguma coluna, correspondente à linha da iteração, está em nível alto
       if (gpio_get(pins_matrix_c[j]) == 1){
-        // Se estiver, retorna a tecla através do mapeamento do teclado
+        // Se estiver, leva a linha de volta a 0 e retorna a tecla através do mapeamento do teclado
+        gpio_put(pins_matrix_r[i], 0);
         return KEY_MAP[i][j];
       }
     }

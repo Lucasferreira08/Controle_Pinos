@@ -35,7 +35,10 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(Controle_Pinos Controle_Pinos.c )
+add_executable(Controle_Pinos 
+    Controle_Pinos.c
+    C:/Dev/Controle_Pinos/teclado_matricial/teclado_matricial.c
+)
 
 pico_set_program_name(Controle_Pinos "Controle_Pinos")
 pico_set_program_version(Controle_Pinos "0.1")
@@ -50,7 +53,8 @@ target_link_libraries(Controle_Pinos
 
 # Add the standard include files to the build
 target_include_directories(Controle_Pinos PRIVATE
-  ${CMAKE_CURRENT_LIST_DIR}
+    ${CMAKE_CURRENT_LIST_DIR}
+    C:/Dev/Controle_Pinos/teclado_matricial
 )
 
 # Add any user requested libraries

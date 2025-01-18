@@ -21,6 +21,7 @@ int main(){
     set_rows_output();
     set_cols_input();
 
+    //loop
     while (true) {
 
       printf("Tecla pressionada: %c\n", detect_button());

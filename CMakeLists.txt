@@ -28,35 +28,37 @@ set(PICO_BOARD pico_w CACHE STRING "Board type")
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 
-project(buzzer_tarefa1 C CXX ASM)
+
+project(Controle_Pinos C CXX ASM)
 
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(buzzer_tarefa1 buzzer_tarefa1.c )
+add_executable(Controle_Pinos 
+    Controle_Pinos.c
+    C:/Dev/Controle_Pinos/teclado_matricial/teclado_matricial.c
+)
 
-pico_set_program_name(buzzer_tarefa1 "buzzer_tarefa1")
-pico_set_program_version(buzzer_tarefa1 "0.1")
+pico_set_program_name(Controle_Pinos "Controle_Pinos")
+pico_set_program_version(Controle_Pinos "0.1")
 
 # Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(buzzer_tarefa1 0)
-pico_enable_stdio_usb(buzzer_tarefa1 0)
+pico_enable_stdio_uart(Controle_Pinos 0)
+pico_enable_stdio_usb(Controle_Pinos 0)
 
 # Add the standard library to the build
-target_link_libraries(buzzer_tarefa1
+target_link_libraries(Controle_Pinos
         pico_stdlib)
 
 # Add the standard include files to the build
-target_include_directories(buzzer_tarefa1 PRIVATE
-  ${CMAKE_CURRENT_LIST_DIR}
+target_include_directories(Controle_Pinos PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}
+    C:/Dev/Controle_Pinos/teclado_matricial
 )
 
 # Add any user requested libraries
-target_link_libraries(buzzer_tarefa1 
-        
-        )
+target_link_libraries(Controle_Pinos)
 
-pico_add_extra_outputs(buzzer_tarefa1)
-C
+pico_add_extra_outputs(Controle_Pinos)

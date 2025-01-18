@@ -5,3 +5,5 @@
 void set_rows_output();
 void set_cols_input();
 
+// Função de detecção da tecla pressionada
+char detect_button();

@@ -2,7 +2,6 @@
 #include "pico/stdlib.h"
 #include "hardware/timer.h"
 #include "teclado_matricial/teclado_matricial.h"
-#include "aciona_led_verde.h"
 
 // Definição dos LEDs
 #define GPIO_LED_RED 18
@@ -36,7 +35,7 @@ void setup_leds() {
 void controlar_leds(char tecla) {
     // Controle dos LEDs com base na tecla pressionada
     gpio_put(GPIO_LED_RED, tecla == '*' || tecla == 'A');
-    gpio_put(GPIO_LED_GREEN, tecla == '*' || tecla == 'B');
+    gpio_put(GPIO_LED_GREEN, tecla == '*' || tecla == 'B' || tecla == 'D');
     gpio_put(GPIO_LED_BLUE, tecla == '*' || tecla == 'C');
 }
 

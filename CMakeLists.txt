@@ -54,7 +54,7 @@ target_link_libraries(Controle_Pinos
 # Add the standard include files to the build
 target_include_directories(Controle_Pinos PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}
-    C:/Dev/Controle_Pinos/teclado_matricial
+    teclado_matricial/teclado_matricial.c
 )
 
 # Add any user requested libraries

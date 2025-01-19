@@ -2,6 +2,7 @@
 #include "pico/stdlib.h"
 #include "hardware/timer.h"
 #include "teclado_matricial/teclado_matricial.h"
+#include "aciona_led_verde.h"
 
 // Definição dos LEDs
 #define GPIO_LED_RED 18

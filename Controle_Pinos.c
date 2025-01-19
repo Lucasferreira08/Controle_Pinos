@@ -16,6 +16,7 @@ void setup_buzzer() {
     gpio_set_dir(BUZZER_PIN, GPIO_OUT);
 }
 
+
 void acionar_buzzer() {
     gpio_put(BUZZER_PIN, true); // Liga o buzzer
     sleep_ms(2000);             // Espera 2 segundos

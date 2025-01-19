@@ -3,78 +3,60 @@
 #include "hardware/timer.h"
 #include "teclado_matricial/teclado_matricial.h"
 
-// define o LED de saída
+// Definição dos LEDs
 #define GPIO_LED_RED 18
 #define GPIO_LED_GREEN 17
 #define GPIO_LED_BLUE 16
 
-// Definindo o pino do buzzer
+// Definição do buzzer
 #define BUZZER_PIN 21
 
-void setup_buzzer()
-{
-    // Inicializa o pino do buzzer
+void setup_buzzer() {
     gpio_init(BUZZER_PIN);
     gpio_set_dir(BUZZER_PIN, GPIO_OUT);
-
-    // teclado matricial pra configuracao
-    set_rows_output();
-    set_cols_input();
 }
 
-void acionar_buzzer()
-{
-    gpio_put(BUZZER_PIN, true);  // Liga o buzzer
-    sleep_ms(2000);              // Aguardar 2 segundos
+
+void acionar_buzzer() {
+    gpio_put(BUZZER_PIN, true); // Liga o buzzer
+    sleep_ms(2000);             // Espera 2 segundos
     gpio_put(BUZZER_PIN, false); // Desliga o buzzer
 }
 
-int main()
-{
-    stdio_init_all();
-
+void setup_leds() {
     gpio_init(GPIO_LED_RED);
     gpio_init(GPIO_LED_GREEN);
     gpio_init(GPIO_LED_BLUE);
     gpio_set_dir(GPIO_LED_RED, GPIO_OUT);
     gpio_set_dir(GPIO_LED_GREEN, GPIO_OUT);
     gpio_set_dir(GPIO_LED_BLUE, GPIO_OUT);
+}
 
+void controlar_leds(char tecla) {
+    // Controle dos LEDs com base na tecla pressionada
+    gpio_put(GPIO_LED_RED, tecla == '*' || tecla == 'A');
+    gpio_put(GPIO_LED_GREEN, tecla == '*' || tecla == 'B');
+    gpio_put(GPIO_LED_BLUE, tecla == '*' || tecla == 'C');
+}
+
+int main() {
+    stdio_init_all();
+    setup_leds();
     setup_buzzer();
 
     set_rows_output();
     set_cols_input();
 
-    // loop
-    while (true)
-    {
+    while (true) {
+        char tecla = detect_button(); // Armazena a tecla detectada
+        printf("Tecla pressionada: %c\n", tecla);
 
-        printf("Tecla pressionada: %c\n", detect_button());
+        controlar_leds(tecla); // Controla os LEDs com base na tecla
 
-        if (detect_button() == '*')
-        {
-            gpio_put(GPIO_LED_RED, true);
-            gpio_put(GPIO_LED_GREEN, true);
-            gpio_put(GPIO_LED_BLUE, true);
-        }
-        else if (detect_button() == 'B')
-        {
-            gpio_put(GPIO_LED_RED, false);
-            gpio_put(GPIO_LED_GREEN, false);
-            gpio_put(GPIO_LED_BLUE, true);
-        }
-        // Aciona o buzzer se a tecla for pressionada
-        else if (detect_button() == '#')
-        {
+        if (tecla == '#') {
             acionar_buzzer(); // Aciona o buzzer
         }
-        else
-        {
-            gpio_put(GPIO_LED_RED, false);
-            gpio_put(GPIO_LED_GREEN, false);
-            gpio_put(GPIO_LED_BLUE, false);
-        }
 
-        sleep_ms(1000);
+        sleep_ms(100); // Delay para evitar múltiplas leituras rápidas
     }
 }

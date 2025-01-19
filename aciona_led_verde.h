@@ -3,6 +3,6 @@
 
 void setup_led_verde();
 
-void aciona_led_verde(char tecla);
+void aciona_led_verde(char tecla_acionada);
 
 #endif 

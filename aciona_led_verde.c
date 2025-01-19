@@ -9,7 +9,7 @@ void setup_led_verde() {
     gpio_set_dir(GPIO_LED_VERDE, GPIO_OUT);
 }
 
-void aciona_led_verde(char tecla) {
+void aciona_led_verde(char tecla_acionada) {
     // Chama função de inicialização da GPIO
     setup_led_verde();
 

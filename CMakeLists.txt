@@ -15,9 +15,9 @@ if(WIN32)
 else()
     set(USERHOME $ENV{HOME})
 endif()
-set(sdkVersion 2.1.0)
+set(sdkVersion 1.5.1)
 set(toolchainVersion 13_3_Rel1)
-set(picotoolVersion 2.1.0)
+set(picotoolVersion 2.0.0)
 set(picoVscode ${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
 if (EXISTS ${picoVscode})
     include(${picoVscode})
@@ -38,7 +38,7 @@ pico_sdk_init()
 
 add_executable(Controle_Pinos 
     Controle_Pinos.c
-    C:/Dev/Controle_Pinos/teclado_matricial/teclado_matricial.c
+    teclado_matricial/teclado_matricial.c
 )
 
 pico_set_program_name(Controle_Pinos "Controle_Pinos")
@@ -50,12 +50,13 @@ pico_enable_stdio_usb(Controle_Pinos 0)
 
 # Add the standard library to the build
 target_link_libraries(Controle_Pinos
-        pico_stdlib)
+        pico_stdlib
+)
 
 # Add the standard include files to the build
 target_include_directories(Controle_Pinos PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}
-    C:/Dev/Controle_Pinos/teclado_matricial
+    teclado_matricial
 )
 
 # Add any user requested libraries
